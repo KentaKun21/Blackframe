@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>BLACKFRAME</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets/images/favicon.png">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+<!-- ====================================== -->
+<!-- TRANSITION -->
+<!-- ====================================== -->
+
+<div
+    id="transition"
+    class="transition">
+</div>
+
+<!-- ====================================== -->
+<!-- BACKGROUND VIDEO -->
+<!-- ====================================== -->
+
+<video
+    id="bg-video"
+    autoplay
+    muted
+    playsinline>
+
+    <source
+        src="assets/video/intro.mp4"
+        type="video/mp4">
+
+</video>
+
+<!-- ====================================== -->
+<!-- AUDIO -->
+<!-- ====================================== -->
+
+<audio
+    id="bgm"
+    loop>
+
+    <source
+        src="assets/audio/bgm.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+<audio
+    id="select-sfx">
+
+    <source
+        src="assets/audio/select.wav"
+        type="audio/wav">
+
+</audio>
+
+<audio
+    id="exit-sfx">
+
+    <source
+        src="assets/audio/exit.wav"
+        type="audio/wav">
+
+</audio>
+
+<!-- ====================================== -->
+<!-- HOME -->
+<!-- ====================================== -->
+
+<section
+    id="homeMenu">
+
+    <div class="menu">
+
+        <div
+            class="menu-item"
+            data-page="shop">
+
+            SHOP
+
+        </div>
+
+        <div
+            class="menu-item"
+            data-page="collections">
+
+            COLLECTIONS
+
+        </div>
+
+        <div
+            class="menu-item"
+            data-page="cart">
+
+            CART
+
+            <span id="cart-count">
+
+                0
+
+            </span>
+
+        </div>
+
+        <div
+            class="menu-item"
+            data-page="about">
+
+            ABOUT
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- SHOP PAGE -->
+<!-- ====================================== -->
+
+<section
+    class="page"
+    id="shopPage">
+
+    <img
+        class="page-background"
+        src="assets/images/shop.png"
+        alt="">
+
+    <div class="back-button">
+
+        ← BACK
+
+    </div>
+
+    <div class="page-title">
+
+        SHOP
+
+    </div>
+
+    <div class="shop-container">
+
+        <div class="shop-grid">
+
+            <!-- BF-001 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-001
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME HOODIE
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ DROP 01
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+            <!-- BF-002 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-002
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME TEE
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ DROP 01
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+            <!-- BF-003 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-003
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME POSTER
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ COMING SOON
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+            <!-- BF-004 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-004
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME CAP
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ CONCEPT
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+            <!-- BF-005 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-005
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME PANTS
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ PROTOTYPE
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+            <!-- BF-006 -->
+
+            <div class="product-card">
+
+                <div class="product-tag">
+                    BF-006
+                </div>
+
+                <div class="product-image">
+
+                    IMAGE
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        BLACKFRAME BAG
+
+                    </div>
+
+                    <div class="product-status">
+
+                        ★ ARCHIVE
+
+                    </div>
+
+                    <div class="product-price">
+
+                        PRICE TBA
+
+                    </div>
+
+                </div>
+
+                <div class="view-button">
+
+                    VIEW ITEM →
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ====================================== -->
+<!-- PRODUCT PAGE -->
+<!-- ====================================== -->
+
+<section
+    class="page"
+    id="productPage">
+
+    <img
+        class="page-background"
+        src="assets/images/shop.png"
+        alt="">
+
+    <div class="back-button">
+
+        ← BACK
+
+    </div>
+
+    <div class="product-layout">
+
+        <!-- LEFT -->
+
+        <div class="product-preview">
+
+            <div class="product-preview-image">
+
+                PRODUCT IMAGE
+
+            </div>
+
+            <div class="preview-thumbs">
+
+                <div class="thumb active">
+                    01
+                </div>
+
+                <div class="thumb">
+                    02
+                </div>
+
+                <div class="thumb">
+                    03
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="product-details">
+
+            <div class="product-code">
+
+                ★ BF-001
+
+            </div>
+
+            <div class="divider"></div>
+
+            <h1>
+
+                BLACKFRAME<br>
+
+                HOODIE
+
+            </h1>
+
+            <div class="product-meta">
+
+                <div>
+
+                    <span>DROP</span>
+
+                    <strong>01</strong>
+
+                </div>
+
+                <div>
+
+                    <span>STATUS</span>
+
+                    <strong>LIMITED</strong>
+
+                </div>
+
+                <div>
+
+                    <span>CATEGORY</span>
+
+                    <strong>OUTERWEAR</strong>
+
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="price-large">
+
+                PRICE TBA
+
+            </div>
+
+            <h3>
+
+                SELECT SIZE
+
+            </h3>
+
+            <div class="sizes">
+
+                <div class="size active">
+                    S
+                </div>
+
+                <div class="size">
+                    M
+                </div>
+
+                <div class="size">
+                    L
+                </div>
+
+                <div class="size">
+                    XL
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="product-description">
+
+                <p>
+
+                    Heavyweight French Terry cotton.
+
+                </p>
+
+                <p>
+
+                    Oversized silhouette.
+
+                </p>
+
+                <p>
+
+                    Signature BLACKFRAME graphics.
+
+                </p>
+
+                <p>
+
+                    Premium stitched construction.
+
+                </p>
+
+            </div>
+
+            <button class="cart-button">
+
+                ★ ADD TO CART
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ====================================== -->
+<!-- COLLECTIONS PAGE -->
+<!-- ====================================== -->
+
+<section
+    class="page"
+    id="collectionsPage">
+
+    <img
+        class="page-background"
+        src="assets/images/collections.png"
+        alt="">
+
+    <div class="back-button">
+
+        ← BACK
+
+    </div>
+
+    <div class="page-title">
+
+        COLLECTIONS
+
+    </div>
+
+    <div class="collections-layout">
+
+        <div class="collection-card">
+
+            <div class="collection-number">
+
+                01
+
+            </div>
+
+            <h2>
+
+                DROP 01
+
+            </h2>
+
+            <p>
+
+                BLACKFRAME'S FIRST OFFICIAL RELEASE.
+
+            </p>
+
+        </div>
+
+        <div class="collection-card">
+
+            <div class="collection-number">
+
+                02
+
+            </div>
+
+            <h2>
+
+                ARCHIVE
+
+            </h2>
+
+            <p>
+
+                PREVIOUS DESIGNS AND CONCEPT PIECES.
+
+            </p>
+
+        </div>
+
+        <div class="collection-card">
+
+            <div class="collection-number">
+
+                03
+
+            </div>
+
+            <h2>
+
+                FUTURE
+
+            </h2>
+
+            <p>
+
+                UPCOMING PROJECTS.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- CART PAGE -->
+<!-- ====================================== -->
+
+<section
+    class="page"
+    id="cartPage">
+
+    <img
+        class="page-background"
+        src="assets/images/cart.png"
+        alt="">
+
+    <div class="back-button">
+
+        ← BACK
+
+    </div>
+
+    <div class="page-title">
+
+        CART
+
+    </div>
+
+    <div class="cart-layout">
+
+        <div class="cart-items">
+
+            <div class="cart-item">
+
+                <div class="cart-thumb">
+
+                    IMG
+
+                </div>
+
+                <div class="cart-info">
+
+                    <h3>
+
+                        BLACKFRAME HOODIE
+
+                    </h3>
+
+                    <p>
+
+                        SIZE M
+
+                    </p>
+
+                </div>
+
+                <div class="cart-price">
+
+                    PRICE TBA
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="cart-summary">
+
+            <h2>
+
+                ORDER SUMMARY
+
+            </h2>
+
+            <div class="divider"></div>
+
+            <div class="summary-row">
+
+                <span>
+
+                    ITEMS
+
+                </span>
+
+                <span id="cartItems">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+
+                    TOTAL
+
+                </span>
+
+                <span>
+
+                    PRICE TBA
+
+                </span>
+
+            </div>
+
+            <button class="checkout-button">
+
+                CHECKOUT →
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- ABOUT PAGE -->
+<!-- ====================================== -->
+
+<section
+    class="page"
+    id="aboutPage">
+
+    <img
+        class="page-background"
+        src="assets/images/about.jpeg"
+        alt="">
+
+    <div class="back-button">
+
+        ← BACK
+
+    </div>
+
+    <div class="page-title">
+
+        ABOUT
+
+    </div>
+
+   
+
+      
+
+
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- FOOTER -->
+<!-- ====================================== -->
+
+<div class="site-footer">
+
+    © BLACKFRAME 2026
+
+</div>
+
+<!-- ====================================== -->
+<!-- JAVASCRIPT -->
+<!-- ====================================== -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
