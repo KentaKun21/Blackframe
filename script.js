@@ -1,5 +1,5 @@
 // ======================================================
-// BLACKFRAME v1.0
+// BLACKFRAME v2.0
 // ======================================================
 
 // ======================================================
@@ -7,103 +7,113 @@
 // ======================================================
 
 const transition = document.getElementById("transition");
-
 const homeMenu = document.getElementById("homeMenu");
 
 const video = document.getElementById("bg-video");
 
 const bgm = document.getElementById("bgm");
-
 const selectSfx = document.getElementById("select-sfx");
-
 const exitSfx = document.getElementById("exit-sfx");
 
-const cartCounter = document.getElementById("cartItems");
+const cartCounter = document.getElementById("cart-count");
 
 const pages = {
 
-    shop: document.getElementById("shopPage"),
+    shop:document.getElementById("shopPage"),
 
-    product: document.getElementById("productPage"),
+    product:document.getElementById("productPage"),
 
-    collections: document.getElementById("collectionsPage"),
+    collections:document.getElementById("collectionsPage"),
 
-    cart: document.getElementById("cartPage"),
+    cart:document.getElementById("cartPage"),
 
-    about: document.getElementById("aboutPage")
+    about:document.getElementById("aboutPage")
 
 };
+
 // ======================================================
 // PRODUCTS
 // ======================================================
 
-const products = [
+const products=[
 
-    {
+{
 
-        id:"BF-001",
+    id:"BF-001",
 
-        name:"BLACKFRAME HOODIE",
+    name:"BLACKFRAME HOODIE",
 
-        price:"$79.99",
+    category:"OUTERWEAR",
 
-        image:"assets/images/products/hoodie.png",
+    status:"LIMITED",
 
-        category:"OUTERWEAR",
+    price:"PRICE TBA",
 
-        status:"LIMITED",
+    image:"assets/images/products/hoodie.png",
 
-        description:[
-            "Heavyweight Cotton",
-            "Oversized Fit",
-            "Premium Stitching"
-        ]
+    description:[
 
-    },
+        "Heavyweight French Terry",
 
-    {
+        "Oversized Fit",
 
-        id:"BF-002",
+        "Premium Construction"
 
-        name:"BLACKFRAME TEE",
+    ]
 
-        price:"$39.99",
+},
 
-        image:"assets/images/products/tee.png",
+{
 
-        category:"TOP",
+    id:"BF-002",
 
-        status:"AVAILABLE",
+    name:"BLACKFRAME TEE",
 
-        description:[
-            "240 GSM Cotton",
-            "Screen Printed",
-            "Relaxed Fit"
-        ]
+    category:"TOP",
 
-    },
+    status:"AVAILABLE",
 
-    {
+    price:"PRICE TBA",
 
-        id:"BF-003",
+    image:"assets/images/products/tee.png",
 
-        name:"BLACKFRAME POSTER",
+    description:[
 
-        price:"$19.99",
+        "240 GSM Cotton",
 
-        image:"assets/images/products/poster.png",
+        "Relaxed Fit",
 
-        category:"ART",
+        "Premium Screen Print"
 
-        status:"COMING SOON",
+    ]
 
-        description:[
-            "Gloss Finish",
-            "Limited Print",
-            "A2 Size"
-        ]
+},
 
-    }
+{
+
+    id:"BF-003",
+
+    name:"BLACKFRAME POSTER",
+
+    category:"ART",
+
+    status:"COMING SOON",
+
+    price:"PRICE TBA",
+
+    image:"assets/images/products/poster.png",
+
+    description:[
+
+        "Gloss Finish",
+
+        "A2 Print",
+
+        "Limited Edition"
+
+    ]
+
+}
 
 ];
 
@@ -111,49 +121,55 @@ const products = [
 // APP STATE
 // ======================================================
 
-let currentPage = "home";
+let currentPage="home";
 
-let previousPage = "home";
+let previousPage="home";
 
-let musicStarted = false;
+let currentProduct=products[0];
 
-let selectedSize = "M";
+let selectedSize="M";
 
-let cart = [];
+let musicStarted=false;
+
+let cart=[];
 
 // ======================================================
 // VIDEO
 // ======================================================
 
-video.addEventListener("ended", () => {
+if(video){
 
-    video.src = "assets/video/loop.mp4";
+    video.addEventListener("ended",()=>{
 
-    video.loop = true;
+        video.src="assets/video/loop.mp4";
 
-    video.play();
+        video.loop=true;
 
-});
+        video.play();
+
+    });
+
+}
 
 // ======================================================
-// START MUSIC
+// MUSIC
 // ======================================================
 
-document.addEventListener("click", () => {
+document.addEventListener("click",()=>{
 
     if(musicStarted) return;
 
-    musicStarted = true;
+    musicStarted=true;
 
-    bgm.volume = 0.75;
+    if(bgm){
 
-    bgm.play().catch(()=>{});
+        bgm.volume=.75;
 
-},{
+        bgm.play().catch(()=>{});
 
-    once:true
+    }
 
-});
+},{once:true});
 
 // ======================================================
 // AUDIO
@@ -161,17 +177,21 @@ document.addEventListener("click", () => {
 
 function playSelect(){
 
-    selectSfx.currentTime = 0;
+    if(!selectSfx) return;
 
-    selectSfx.play();
+    selectSfx.currentTime=0;
+
+    selectSfx.play().catch(()=>{});
 
 }
 
 function playExit(){
 
-    exitSfx.currentTime = 0;
+    if(!exitSfx) return;
 
-    exitSfx.play();
+    exitSfx.currentTime=0;
+
+    exitSfx.play().catch(()=>{});
 
 }
 
@@ -183,7 +203,11 @@ function closePages(){
 
     Object.values(pages).forEach(page=>{
 
-        page.classList.remove("active");
+        if(page){
+
+            page.classList.remove("active");
+
+        }
 
     });
 
@@ -202,6 +226,7 @@ function transitionIn(callback){
     },400);
 
 }
+
 // ======================================================
 // OPEN PAGE
 // ======================================================
@@ -213,12 +238,13 @@ function openPage(pageName){
     playSelect();
 
     previousPage = currentPage;
-
     currentPage = pageName;
+
+    history.pushState({ page: pageName }, "", "#" + pageName);
 
     transitionIn(()=>{
 
-        homeMenu.style.display = "none";
+        homeMenu.style.display="none";
 
         closePages();
 
@@ -236,47 +262,21 @@ function goBack(){
 
     playExit();
 
-    transitionIn(()=>{
-
-        // PRODUCT -> SHOP
-
-        if(currentPage === "product"){
-
-            closePages();
-
-            currentPage = "shop";
-
-            previousPage = "home";
-
-            pages.shop.classList.add("active");
-
-            return;
-
-        }
-
-        // ALL OTHER PAGES -> HOME
-
-        closePages();
-
-        currentPage = "home";
-
-        previousPage = "home";
-
-        homeMenu.style.display = "flex";
-
-    });
+    history.back();
 
 }
 
 // ======================================================
-// HOME MENU
+// MENU BUTTONS
 // ======================================================
 
-document.querySelectorAll(".menu-item").forEach(item=>{
+document.querySelectorAll(".menu-item")
 
-    item.addEventListener("click",()=>{
+.forEach(button=>{
 
-        openPage(item.dataset.page);
+    button.addEventListener("click",()=>{
+
+        openPage(button.dataset.page);
 
     });
 
@@ -286,7 +286,9 @@ document.querySelectorAll(".menu-item").forEach(item=>{
 // BACK BUTTONS
 // ======================================================
 
-document.querySelectorAll(".back-button").forEach(button=>{
+document.querySelectorAll(".back-button")
+
+.forEach(button=>{
 
     button.addEventListener("click",goBack);
 
@@ -298,37 +300,174 @@ document.querySelectorAll(".back-button").forEach(button=>{
 
 document.addEventListener("keydown",(event)=>{
 
-    if(event.key !== "Escape") return;
+    if(event.key!=="Escape") return;
 
-    if(currentPage !== "home"){
+    if(currentPage!=="home"){
 
         goBack();
 
     }
 
 });
+// ======================================================
+// PRODUCT PAGE ELEMENTS
+// ======================================================
+
+const productTitle =
+document.querySelector(".product-details h1");
+
+const productCode =
+document.querySelector(".product-code");
+
+const productPrice =
+document.querySelector(".price-large");
+
+const productDescription =
+document.querySelector(".product-description");
+
+const metaValues =
+document.querySelectorAll(".product-meta strong");
+
+const productCategory = metaValues[2];
+
+const productStatus = metaValues[1];
+
+const previewImage =
+document.querySelector(".product-preview-image");
 
 // ======================================================
-// VIEW PRODUCT
+// LOAD PRODUCT
 // ======================================================
 
-document.querySelectorAll(".view-button").forEach(button=>{
+function loadProduct(index){
 
-    button.addEventListener("click",()=>{
+    currentProduct = products[index];
+
+    if(!currentProduct) return;
+
+    if(productTitle){
+
+        productTitle.innerHTML =
+        currentProduct.name.replace(" ","<br>");
+
+    }
+
+    if(productCode){
+
+        productCode.textContent =
+        "★ " + currentProduct.id;
+
+    }
+
+    if(productPrice){
+
+        productPrice.textContent =
+        currentProduct.price;
+
+    }
+
+    if(productCategory){
+
+        productCategory.textContent =
+        currentProduct.category;
+
+    }
+
+    if(productStatus){
+
+        productStatus.textContent =
+        currentProduct.status;
+
+    }
+
+    if(productDescription){
+
+        productDescription.innerHTML = "";
+
+        currentProduct.description.forEach(line=>{
+
+            productDescription.innerHTML +=
+
+            `<p>${line}</p>`;
+
+        });
+
+    }
+
+    if(previewImage){
+
+        previewImage.innerHTML =
+
+        `<img src="${currentProduct.image}" alt="${currentProduct.name}">`;
+
+    }
+
+}
+
+// ======================================================
+// SHOP PRODUCT CARDS
+// ======================================================
+
+const productCards =
+document.querySelectorAll(".product-card");
+
+productCards.forEach((card,index)=>{
+
+    card.addEventListener("click",()=>{
 
         playSelect();
 
-        previousPage = currentPage;
+        loadProduct(index);
 
-        currentPage = "product";
+        openPage("product");
 
-        transitionIn(()=>{
+    });
 
-            closePages();
+});
 
-            pages.product.classList.add("active");
+// ======================================================
+// VIEW BUTTONS
+// ======================================================
+
+document.querySelectorAll(".view-button")
+
+.forEach((button,index)=>{
+
+    button.addEventListener("click",(event)=>{
+
+        event.stopPropagation();
+
+        playSelect();
+
+        loadProduct(index);
+
+        openPage("product");
+
+    });
+
+});
+
+// ======================================================
+// PRODUCT THUMBNAILS
+// ======================================================
+
+document.querySelectorAll(".thumb")
+
+.forEach(thumb=>{
+
+    thumb.addEventListener("click",()=>{
+
+        playSelect();
+
+        document.querySelectorAll(".thumb")
+
+        .forEach(item=>{
+
+            item.classList.remove("active");
 
         });
+
+        thumb.classList.add("active");
 
     });
 
@@ -337,165 +476,32 @@ document.querySelectorAll(".view-button").forEach(button=>{
 // SIZE SELECTOR
 // ======================================================
 
-document.querySelectorAll(".size").forEach(button=>{
+document.querySelectorAll(".size")
 
-    button.addEventListener("click",()=>{
+.forEach(size=>{
 
-        document.querySelectorAll(".size").forEach(size=>{
+    size.addEventListener("click",()=>{
 
-            size.classList.remove("active");
+        playSelect();
+
+        document.querySelectorAll(".size")
+
+        .forEach(item=>{
+
+            item.classList.remove("active");
 
         });
 
-        button.classList.add("active");
+        size.classList.add("active");
 
-        selectedSize = button.textContent.trim();
-
-        playSelect();
+        selectedSize=size.textContent.trim();
 
     });
 
 });
 
-// Default
-
-document.querySelector(".size")?.classList.add("active");
-
 // ======================================================
-// ADD TO CART
-// ======================================================
-
-const addButton = document.querySelector(".cart-button");
-
-if(addButton){
-
-    addButton.addEventListener("click",()=>{
-
-        playSelect();
-
-        const product={
-
-            id:"BF-001",
-
-            name:"BLACKFRAME HOODIE",
-
-            size:selectedSize,
-
-            price:"PRICE TBA"
-
-        };
-
-        cart.push(product);
-
-        updateCart();
-
-    });
-
-}
-
-// ======================================================
-// UPDATE CART
-// ======================================================
-
-function updateCart(){
-
-    cartCounter.textContent = cart.length;
-
-    renderCart();
-
-}
-
-// ======================================================
-// RENDER CART
-// ======================================================
-
-function renderCart(){
-
-    const container=document.querySelector(".cart-items");
-
-    if(!container) return;
-
-    container.innerHTML="";
-
-    cart.forEach(item=>{
-
-        container.innerHTML+=`
-
-        <div class="cart-item">
-
-            <div class="cart-thumb">
-
-                IMG
-
-            </div>
-
-            <div class="cart-info">
-
-                <h3>${item.name}</h3>
-
-                <p>SIZE ${item.size}</p>
-
-            </div>
-
-            <div class="cart-price">
-
-                ${item.price}
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    if(cart.length===0){
-
-        container.innerHTML=`
-
-        <div class="cart-item">
-
-            <div class="cart-info">
-
-                <h3>
-
-                    YOUR CART IS EMPTY
-
-                </h3>
-
-            </div>
-
-        </div>
-
-        `;
-
-    }
-
-}
-
-// ======================================================
-// CHECKOUT
-// ======================================================
-
-const checkout=document.querySelector(".checkout-button");
-
-if(checkout){
-
-    checkout.addEventListener("click",()=>{
-
-        playSelect();
-
-        alert(
-
-            "CHECKOUT COMING IN VERSION 2.0"
-
-        );
-
-    });
-
-}
-// ======================================================
-// SAVE CART
+// CART STORAGE
 // ======================================================
 
 function saveCart(){
@@ -510,13 +516,11 @@ function saveCart(){
 
 }
 
-// ======================================================
-// LOAD CART
-// ======================================================
-
 function loadCart(){
 
-    const saved = localStorage.getItem(
+    const saved=
+
+    localStorage.getItem(
 
         "blackframe-cart"
 
@@ -524,27 +528,9 @@ function loadCart(){
 
     if(saved){
 
-        cart = JSON.parse(saved);
+        cart=JSON.parse(saved);
 
     }
-
-    updateCart();
-
-}
-
-loadCart();
-
-// ======================================================
-// UPDATE CART
-// ======================================================
-
-function updateCart(){
-
-    cartCounter.textContent = cart.length;
-
-    renderCart();
-
-    saveCart();
 
 }
 
@@ -552,13 +538,15 @@ function updateCart(){
 // ADD PRODUCT
 // ======================================================
 
-function addProduct(product){
+function addProduct(){
 
-    const existing = cart.find(item=>{
+    const existing=
 
-        return item.id===product.id &&
+    cart.find(item=>{
 
-               item.size===product.size;
+        return item.id===currentProduct.id &&
+
+               item.size===selectedSize;
 
     });
 
@@ -570,13 +558,45 @@ function addProduct(product){
 
     else{
 
-        product.qty=1;
+        cart.push({
 
-        cart.push(product);
+            id:currentProduct.id,
+
+            name:currentProduct.name,
+
+            image:currentProduct.image,
+
+            price:currentProduct.price,
+
+            size:selectedSize,
+
+            qty:1
+
+        });
 
     }
 
     updateCart();
+
+}
+
+// ======================================================
+// ADD BUTTON
+// ======================================================
+
+const addButton=
+
+document.querySelector(".cart-button");
+
+if(addButton){
+
+    addButton.addEventListener("click",()=>{
+
+        playSelect();
+
+        addProduct();
+
+    });
 
 }
 
@@ -586,12 +606,37 @@ function addProduct(product){
 
 function removeProduct(index){
 
+    playExit();
+
     cart.splice(index,1);
 
     updateCart();
 
 }
 
+window.removeProduct=removeProduct;
+
+// ======================================================
+// CART COUNTER
+// ======================================================
+
+function updateCounter(){
+
+    let total=0;
+
+    cart.forEach(item=>{
+
+        total+=item.qty;
+
+    });
+
+    if(cartCounter){
+
+        cartCounter.textContent=total;
+
+    }
+
+}
 // ======================================================
 // RENDER CART
 // ======================================================
@@ -612,11 +657,7 @@ function renderCart(){
 
             <div class="cart-info">
 
-                <h3>
-
-                    YOUR CART IS EMPTY
-
-                </h3>
+                <h3>YOUR CART IS EMPTY</h3>
 
             </div>
 
@@ -636,29 +677,17 @@ function renderCart(){
 
             <div class="cart-thumb">
 
-                IMG
+                <img src="${item.image}" alt="${item.name}">
 
             </div>
 
             <div class="cart-info">
 
-                <h3>
+                <h3>${item.name}</h3>
 
-                    ${item.name}
+                <p>SIZE ${item.size}</p>
 
-                </h3>
-
-                <p>
-
-                    SIZE ${item.size}
-
-                </p>
-
-                <p>
-
-                    QTY ${item.qty}
-
-                </p>
+                <p>QTY ${item.qty}</p>
 
             </div>
 
@@ -686,39 +715,101 @@ function renderCart(){
 
 }
 
+// ======================================================
+// UPDATE CART
+// ======================================================
+
+function updateCart(){
+
+    updateCounter();
+
+    renderCart();
+
+    saveCart();
+
+}
 
 // ======================================================
-// ADD TO CART
+// CHECKOUT
 // ======================================================
 
-if(addButton){
+const checkout=
 
-    addButton.addEventListener("click",()=>{
+document.querySelector(".checkout-button");
 
-        addProduct({
+if(checkout){
 
-            id:"BF-001",
+    checkout.addEventListener("click",()=>{
 
-            name:"BLACKFRAME HOODIE",
+        playSelect();
 
-            size:selectedSize,
-
-            price:"PRICE TBA"
-
-        });
+        alert("CHECKOUT COMING SOON");
 
     });
 
 }
 
 // ======================================================
-// START
+// LOAD FIRST PRODUCT
 // ======================================================
+
+if(products.length){
+
+    loadProduct(0);
+
+}
+// ======================================================
+// MOBILE / BROWSER BACK SUPPORT
+// ======================================================
+
+// Initial history state
+history.replaceState({ page: "home" }, "");
+
+// Push a history entry whenever a page opens
+
+
+// Handle Android/browser back button
+window.addEventListener("popstate", () => {
+
+    transitionIn(() => {
+
+        if(currentPage === "product"){
+
+            currentPage = "shop";
+
+            closePages();
+
+            pages.shop.classList.add("active");
+
+            return;
+
+        }
+
+        if(currentPage !== "home"){
+
+            currentPage = "home";
+
+            closePages();
+
+            homeMenu.style.display = "flex";
+
+            return;
+
+        }
+
+    });
+
+});
+// ======================================================
+// LOAD SAVED CART
+// ======================================================
+
+loadCart();
 
 updateCart();
 
-console.log(
+// ======================================================
+// READY
+// ======================================================
 
-    "BLACKFRAME v1.0 READY"
-
-);
+console.log("BLACKFRAME READY");
